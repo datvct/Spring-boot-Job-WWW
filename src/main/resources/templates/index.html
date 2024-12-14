@@ -2,52 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Candidates</title>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384
-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous">
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384
-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            gap:50px;
+        }
+
+        header .logo img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Banner */
+        .banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            height: 100vh;
+        }
+
+        .banner-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .banner-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .banner-content button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: #4CAF50;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .banner-content button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+    </style>
 </head>
 <body>
-<div th:switch="${candidates}" >
-    <h2 th:case="null">No candidates yet!</h2>
-    <div th:case="*">
-        <h2>Candidates</h2>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>dob</th>
-                <th>address</th>
-                <th>phone</th>
-                <th>email</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="candidate : ${candidates}">
-                <td th:text="${candidate.id}"></td>
-                <td th:text="${candidate.fullName}"></td>
-                <td th:text="${candidate.dob}"></td>
-                <td th:text="${candidate.address}"></td>
-                <td th:text="${candidate.phone}"></td>
-                <td th:text="${candidate.email}"></td>
-                <td><a th:href="@{/edit/{id}(id=${candidate.id})}">Edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${candidate.id})}">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <img src="https://dansolutions.vn/wp-content/uploads/2024/11/logo-only-512-150x150.png" alt="Logo" class="logo-img">
     </div>
-</div>
+    <nav>
+        <ul>
+            <li><a href="#">Trang Chủ</a></li>
+            <li><a href="/candidates?size=10&page=1">Danh sách ứng viên</a></li>
+            <li><a href="#">Dịch Vụ</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Banner -->
+<section class="banner">
+    <div class="banner-content">
+        <h2>Chào Mừng Đến Với Trang Web Của Chúng Tôi!</h2>
+        <p>Khám phá dịch vụ tuyệt vời và các thông tin hữu ích.</p>
+        <button>Khám Phá Ngay</button>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Công ty TNHH 1 thành viên (Văn Công Thành Đạt)</p>
+</footer>
 </body>
 </html>

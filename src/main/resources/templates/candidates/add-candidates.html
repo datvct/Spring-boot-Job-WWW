@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Ứng Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Ứng Viên</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ứng Viên</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tuyển Dụng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên Hệ</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <h2 class="form-title">Thêm Ứng Viên</h2>
+    <form id="candidateForm" action="/add-candidate" method="POST">
+        <div class="form-group">
+            <label for="candidateName">Họ và Tên</label>
+            <input type="text" class="form-control" id="candidateName" name="candidateName" required>
+        </div>
+        <div class="form-group">
+            <label for="candidateEmail">Email</label>
+            <input type="email" class="form-control" id="candidateEmail" name="candidateEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="candidatePhone">Số điện thoại</label>
+            <input type="text" class="form-control" id="candidatePhone" name="candidatePhone" required>
+        </div>
+        <div class="form-group">
+            <label for="candidateSkills">Kỹ năng</label>
+            <input type="text" class="form-control" id="candidateSkills" name="candidateSkills" placeholder="Nhập các kỹ năng, cách nhau bằng dấu phẩy" required>
+        </div>
+        <div class="form-group">
+            <label for="jobApplied">Vị trí ứng tuyển</label>
+            <input type="text" class="form-control" id="jobApplied" name="jobApplied" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm ứng viên</button>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Công ty Tuyển Dụng</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
