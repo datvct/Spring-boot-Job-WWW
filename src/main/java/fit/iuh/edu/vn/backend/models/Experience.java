@@ -33,8 +33,8 @@ public class Experience {
     @Column(name = "to_date", nullable = false)
     private LocalDate toDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "can_id")
     private Candidate candidate;
 
 

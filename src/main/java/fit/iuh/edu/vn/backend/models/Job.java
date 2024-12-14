@@ -1,5 +1,6 @@
 package fit.iuh.edu.vn.backend.models;
 
+import fit.iuh.edu.vn.backend.enums.StatusJob;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,10 @@ public class Job {
 
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
     private List<JobSkill> jobSkills;
+
+    @Column(name = "status", nullable = false)
+    private StatusJob status;
+
 
     @Override
     public boolean equals(Object o) {

@@ -28,6 +28,7 @@ public class Skill {
 
     @Column(name = "skill_type")
     private SkillType type;
+
     @OneToMany(mappedBy = "skill")
     private List<JobSkill> jobSkills;
 

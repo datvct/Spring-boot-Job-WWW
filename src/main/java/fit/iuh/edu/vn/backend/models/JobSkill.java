@@ -34,9 +34,4 @@ public class JobSkill {
     private SkillLevel skillLevel;
 
 
-    public JobSkill(JobSkillId id, String skillName, Job job) {
-        this.id = id;
-        this.skill = skill;
-        this.job = job;
-    }
 }
