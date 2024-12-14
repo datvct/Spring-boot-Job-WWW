@@ -21,10 +21,10 @@ public class VanCongThanhDat21117961BtlApplication {
         SpringApplication.run(VanCongThanhDat21117961BtlApplication.class, args);
     }
 
-    @Autowired
-    private CandidateRepository candidateRepository;
-    @Autowired
-    private AddressRepository addressRepository;
+//    @Autowired
+//    private CandidateRepository candidateRepository;
+//    @Autowired
+//    private AddressRepository addressRepository;
 
 //    @Bean
 //    CommandLineRunner initData(){

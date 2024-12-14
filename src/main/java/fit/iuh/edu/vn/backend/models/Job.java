@@ -12,7 +12,6 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Table(name = "job")
 public class Job {
     @Id
@@ -48,5 +47,25 @@ public class Job {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Job(String jobDesc, String jobName, Company company, List<JobSkill> jobSkills, StatusJob status) {
+        this.jobDesc = jobDesc;
+        this.jobName = jobName;
+        this.company = company;
+        this.jobSkills = jobSkills;
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "id=" + id +
+                ", jobDesc='" + jobDesc + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", company=" + company +
+                ", jobSkills=" + jobSkills +
+                ", status=" + status +
+                '}';
     }
 }

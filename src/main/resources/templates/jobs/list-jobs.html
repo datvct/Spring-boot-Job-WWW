@@ -2,30 +2,303 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Job List</title>
+    <title>Danh sách tuyển dụng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            gap: 50px;
+        }
+
+        header .logo img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .btn-post-job {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-post-job:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 10px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination .active {
+            background-color: #ff9c00;
+            color: white;
+            font-weight: bold;
+            border-color: #ff9c00;
+        }
+
+        .pagination .disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        .pagination .prev, .pagination .next {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .pagination .prev:hover, .pagination .next:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .page-numbers {
+            display: flex;
+        }
+
+        .page-numbers a {
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .page-numbers a.active {
+            background-color: #ff9c00;
+            color: white;
+            font-weight: bold;
+        }
+
+        .page-numbers a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .page-numbers a.disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2>Job List</h2>
-    <table class="table table-striped">
+<header>
+    <div class="logo">
+        <img src="https://dansolutions.vn/wp-content/uploads/2024/11/logo-only-512-150x150.png" alt="Logo" class="logo-img">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Trang Chủ</a></li>
+            <li><a href="/candidates?size=10&page=1">Danh sách ứng viên</a></li>
+            <li><a href="/danh-sach-tuyen-dung">Danh sách vị trí tuyển dụng</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container pt-4 pb-5">
+    <div class="content-header">
+        <h1 class="fw-bold">Danh sách công việc</h1>
+        <div>
+            <span class="fw-bold me-3" th:text="'Tổng số công việc: ' + ${jobPage.totalElements}"></span>
+            <button class="btn-post-job" data-bs-toggle="modal" data-bs-target="#postJobModal">Đăng công việc mới</button>
+        </div>
+    </div>
+
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Skills</th>
+            <th>Tên công việc</th>
+            <th>Mô tả</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="job : ${jobs}">
-            <td th:text="${job.title}"></td>
-            <td th:text="${job.description}"></td>
-            <td>
-                <span th:each="skill : ${job.skills}" th:text="${skill.skillName} + ' '"></span>
-            </td>
+            <td th:text="${job.jobName}"></td>
+            <td th:text="${job.jobDesc}"></td>
         </tr>
         </tbody>
     </table>
+
+    <div class="pagination" th:if="${jobPage.totalPages > 0}">
+        <!-- Previous page arrow -->
+        <a th:href="@{/danh-sach-tuyen-dung(page=${jobPage.number}, size=${jobPage.size})}" class="prev"
+           th:class="${jobPage.number == 0 ? 'disabled' : ''}">&laquo;</a>
+
+        <!-- Page numbers -->
+        <div class="page-numbers">
+            <a th:each="pageNumber : ${pageNumbers}"
+               th:href="@{/danh-sach-tuyen-dung(page=${pageNumber}, size=${jobPage.size})}"
+               th:text="${pageNumber == -1 ? '...' : pageNumber}"
+               th:class="${pageNumber == jobPage.number + 1 ? 'active' : ''}"></a>
+        </div>
+
+        <!-- Next page arrow -->
+        <a th:href="@{/danh-sach-tuyen-dung(page=${jobPage.number + 2}, size=${jobPage.size})}" class="next"
+           th:class="${jobPage.number == jobPage.totalPages - 1 ? 'disabled' : ''}">&raquo;</a>
+    </div>
 </div>
+<div class="modal fade" id="postJobModal" tabindex="-1" aria-labelledby="postJobModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="postJobModalLabel">Đăng Công Việc Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="postJobForm" action="/post-job" method="post">
+                    <div class="mb-3">
+                        <label for="jobName" class="form-label">Tên công việc</label>
+                        <input type="text" class="form-control" id="jobName" name="jobName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobDesc" class="form-label">Mô tả công việc</label>
+                        <textarea class="form-control" id="jobDesc" name="jobDesc" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="skills" class="form-label">Kỹ năng (ID)</label>
+                        <input type="text" class="form-control" id="skills" name="skills" placeholder="Nhập các ID kỹ năng, cách nhau bởi dấu phẩy">
+                    </div>
+                    <div class="mb-3">
+                        <label for="companyId" class="form-label">ID Công ty</label>
+                        <div class="mb-3">
+                            <select class="form-control" id="companyId" name="companyId" required>
+                                <option value="">Chọn công ty</option>
+                                <option value="1">Tech Corp</option>
+                                <option value="2">Edu Vietnam</option>
+                                <option value="3">HealthPlus</option>
+                                <option value="4">Foodies</option>
+                                <option value="5">GreenWorld</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Đăng Công Việc</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2024 Công ty TNHH 1 thành viên (Văn Công Thành Đạt)</p>
+</footer>
 </body>
+<script>
+    document.getElementById('postJobForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var myModal = new bootstrap.Modal(document.getElementById('postJobModal'));
+        myModal.hide(); // Close the modal
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>

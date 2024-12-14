@@ -10,7 +10,6 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Table(name = "job_skill")
 public class JobSkill {
     @EmbeddedId
@@ -29,7 +28,6 @@ public class JobSkill {
     @Column(name = "more_infos", length = 1000)
     private String moreInfos;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "skill_level", nullable = false)
     private SkillLevel skillLevel;
 
