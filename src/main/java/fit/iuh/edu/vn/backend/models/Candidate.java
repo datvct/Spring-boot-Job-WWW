@@ -51,6 +51,14 @@ public class Candidate {
         return Objects.equals(id, candidate.id);
     }
 
+    public Candidate(String fullName, LocalDate dob, Address address, String phone, String email) {
+        this.fullName = fullName;
+        this.dob = dob;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
