@@ -2,6 +2,7 @@ package fit.iuh.edu.vn.fontend.controller;
 
 
 import fit.iuh.edu.vn.backend.enums.SkillLevel;
+import fit.iuh.edu.vn.backend.enums.StatusJob;
 import fit.iuh.edu.vn.backend.models.Company;
 import fit.iuh.edu.vn.backend.models.Job;
 import fit.iuh.edu.vn.backend.models.JobSkill;
@@ -100,9 +101,10 @@ public class JobController {
         job.setJobName(jobName);
         job.setJobDesc(jobDesc);
         job.setCompany(companyOptional.get());
-
+        job.setStatus(StatusJob.OPEN);
         Job savedJob = jobRepository.save(job);
 
+        // Lưu các kỹ năng liên quan
         // Lưu các kỹ năng liên quan
         for (Long skillId : skillIds) {
             Optional<Skill> skillOptional = skillRepository.findById(skillId);
@@ -113,6 +115,10 @@ public class JobController {
                 jobSkill.setSkillLevel(SkillLevel.BEGINNER);
                 jobSkill.setMoreInfos("");
 
+                // Đảm bảo jobSkills được khởi tạo
+                if (savedJob.getJobSkills() == null) {
+                    savedJob.setJobSkills(new ArrayList<>());
+                }
                 savedJob.getJobSkills().add(jobSkill);
             });
         }
