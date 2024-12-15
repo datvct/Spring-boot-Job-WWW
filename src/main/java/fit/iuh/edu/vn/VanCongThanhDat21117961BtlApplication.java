@@ -3,13 +3,16 @@ package fit.iuh.edu.vn;
 import com.neovisionaries.i18n.CountryCode;
 import fit.iuh.edu.vn.backend.models.Address;
 import fit.iuh.edu.vn.backend.models.Candidate;
+import fit.iuh.edu.vn.backend.models.User;
 import fit.iuh.edu.vn.backend.repositories.AddressRepository;
 import fit.iuh.edu.vn.backend.repositories.CandidateRepository;
+import fit.iuh.edu.vn.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -40,4 +43,6 @@ public class VanCongThanhDat21117961BtlApplication {
 //            }
 //        };
 //    }
+
+
 }

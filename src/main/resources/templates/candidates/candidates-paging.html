@@ -222,6 +222,9 @@
      p{
        margin-bottom: 0;
      }
+     ul{
+       margin-bottom: 0;
+     }
   </style>
 </head>
 
@@ -236,6 +239,8 @@
       <li><a href="/candidates?size=10&page=1">Danh sách ứng viên</a></li>
       <li><a href="/danh-sach-tuyen-dung">Danh sách vị trí tuyển dụng</a></li>
       <li><a href="#">Liên Hệ</a></li>
+      <a href="/logout" class="logout-button">Đăng Xuất</a> <!-- Nút Logout -->
+
     </ul>
   </nav>
 </header>
@@ -251,7 +256,6 @@
       <th>Quê quán</th>
       <th>SĐT</th>
       <th>Email</th>
-<!--      <th colspan="2">Hoạt động</th>-->
     </tr>
     </thead>
     <tbody>
@@ -262,29 +266,25 @@
       <td th:text="${candidate.address}"></td>
       <td th:text="${candidate.phone}"></td>
       <td th:text="${candidate.email}"></td>
-<!--      <td><a th:href="@{/edit/{id}(id=${candidate.id})}">Edit</a></td>-->
-<!--      <td><a th:href="@{/delete/{id}(id=${candidate.id})}">Delete</a></td>-->
+
     </tr>
     </tbody>
   </table>
 
   <div class="pagination" th:if="${candidatePage.totalPages > 0}">
-    <!-- Mũi tên trước -->
     <a th:href="@{/candidates(page=${candidatePage.number}, size=${candidatePage.size})}" class="prev" th:class="${candidatePage.number == 0 ? 'disabled' : ''}">&laquo;</a>
 
-    <!-- Các số trang -->
     <div class="page-numbers">
       <a th:each="pageNumber : ${pageNumbers}" th:href="@{/candidates(page=${pageNumber}, size=${candidatePage.size})}" th:text="${pageNumber == -1 ? '...' : pageNumber}" th:class="${pageNumber == candidatePage.number + 1 ? 'active' : ''}"></a>
     </div>
 
-    <!-- Mũi tên tiếp theo -->
     <a th:href="@{/candidates(page=${candidatePage.number + 2}, size=${candidatePage.size})}" class="next" th:class="${candidatePage.number == candidatePage.totalPages - 1 ? 'disabled' : ''}">&raquo;</a>
   </div>
-  <footer>
-    <p>© 2024 Company Name. All Rights Reserved.</p>
-  </footer>
-</div>
 
+</div>
+<footer>
+  <p>© 2024 Company Name. All Rights Reserved.</p>
+</footer>
 
 </body>
 

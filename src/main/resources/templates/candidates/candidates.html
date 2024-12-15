@@ -61,36 +61,51 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     }
 
     /* Banner */
-    .banner {
-      background-color: #4CAF50;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-      height: 100vh;
+    .banner * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .banner-content h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
 
-    .banner-content p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    .banner-content button {
-      padding: 10px 20px;
-      font-size: 16px;
+    header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
       background-color: white;
-      color: #4CAF50;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
+      color: black;
+      gap:50px;
     }
 
-    .banner-content button:hover {
-      background-color: #45a049;
+    header .logo img {
+      height: 50px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-right: 20px;
+    }
+    nav ul{
+      margin-bottom: 0;
+    }
+
+    nav ul li a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #4CAF50;
     }
 
     /* Footer */
@@ -112,12 +127,14 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     <img src="https://dansolutions.vn/wp-content/uploads/2024/11/logo-only-512-150x150.png" alt="Logo" class="logo-img">
   </div>
   <nav>
-    <ul>
+    <ul style="margin-bottom: 0!important;">
       <li><a href="#">Trang Chủ</a></li>
       <li><a href="/candidates">Danh sách ứng viên</a></li>
       <li><a href="/danh-sach-tuyen-dung">Danh sách vị trí tuyển dụng</a></li>
       <li><a href="#">Liên Hệ</a></li>
     </ul>
+    <a href="/logout" class="logout-button">Đăng Xuất</a> <!-- Nút Logout -->
+
   </nav>
 </header>
 <div th:switch="${candidates}" >
